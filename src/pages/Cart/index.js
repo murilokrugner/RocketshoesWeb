@@ -28,8 +28,10 @@ function Cart({ cart, total, removeFromCart, updateAmountRequest }) {
         <tread>
           <tr>
             <th />
-            <th>PRODUTO</th>
-            <th>QTD</th>
+            <th>PRODUTO </th>
+            <br />
+            <th>QTD </th>
+            <br />
             <th>SUBTOTAL</th>
             <th />
           </tr>

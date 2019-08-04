@@ -1,0 +1,5 @@
+div.loading {
+  display: flex;
+  padding: 250px;
+  justify-content: center;
+}

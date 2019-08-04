@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import './styles.css';
 import { MdAddShoppingCart } from 'react-icons/md';
+import HashLoader from 'react-spinners/HashLoader';
 import { formatPrice } from '../../util/format';
 import api from '../../services/api';
 
@@ -12,9 +14,11 @@ import { ProductList } from './styles';
 class Home extends Component {
   state = {
     products: [],
+    loading: false,
   };
 
   async componentDidMount() {
+    this.setState({ loading: true });
     const response = await api.get('products');
 
     const data = response.data.map(product => ({
@@ -22,7 +26,7 @@ class Home extends Component {
       priceFormatted: formatPrice(product.price),
     }));
 
-    this.setState({ products: data });
+    this.setState({ loading: false, products: data });
   }
 
   handleAddProduct = id => {
@@ -32,8 +36,16 @@ class Home extends Component {
   };
 
   render() {
-    const { products } = this.state;
+    const { products, loading } = this.state;
     const { amount } = this.props;
+
+    if (loading) {
+      return (
+        <div className="loading">
+          <HashLoader color="#FFF" size={100} />
+        </div>
+      );
+    }
 
     return (
       <ProductList>
