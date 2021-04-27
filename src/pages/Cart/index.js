@@ -12,8 +12,10 @@ import * as CartActions from '../../store/modules/cart/actions';
 
 import { Container, ProductTable, Total } from './styles';
 
+let total = 0;
+
 export default function Cart() {
-  const total = useSelector(state =>
+  total = useSelector(state =>
     formatPrice(
       state.cart.reduce((totalSum, product) => {
         return total + product.price * product.amount;
